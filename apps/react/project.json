@@ -37,6 +37,15 @@
         }
       }
     },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "wrangler pages publish dist/apps/react --project-name=react"
+        ]
+      },
+      "dependsOn": ["build"]
+    },
     "test": {
       "executor": "@nrwl/vite:test",
       "outputs": ["coverage/apps/react"],
