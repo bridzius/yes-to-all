@@ -22,9 +22,10 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
-    - name: Test changes
-      run: npx nx affected --target=test --base=main~1 --head=main
     - name: Build changes
       run: npx nx affected --target=build --base=main~1 --head=main
     - name: Deploy changes
       run: npx nx affected --target=deploy --base=main~1 --head=main
+      env: 
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -19,8 +19,12 @@ export function Articles(props: ArticlesProps) {
     )
       .then((res) => res.json())
       .then(
-        (articles) => setArticles(articles),
-        (error) => console.error(error)
+        (articles) => {
+          setArticles(articles);
+        },
+        (error) => {
+          console.error(error);
+        }
       );
   }, []);
   return (
