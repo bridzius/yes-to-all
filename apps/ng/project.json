@@ -57,6 +57,13 @@
       },
       "defaultConfiguration": "development"
     },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["wrangler pages publish dist/apps/ng --project-name=ng"]
+      },
+      "dependsOn": ["build"]
+    },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
