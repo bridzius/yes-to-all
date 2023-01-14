@@ -19,5 +19,6 @@ jobs:
         node-version: 18.x
         cache: 'npm'
     - run: npm ci
-    - run: npx nx affected:test
-    - run: npx nx affected:build
+    - run: npx nx affected --target=test
+    - run: npx nx affected --target=build
+    - run: npx nx affected --target=deploy
