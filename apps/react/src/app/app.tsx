@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import {  Routes, Link } from 'react-router-dom';
+import { Articles } from './articles/articles';
+import { Route, Routes, Link } from 'react-router-dom';
 
 const StyledApp = styled.div`
   // Your style here
@@ -9,7 +10,7 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-    <h1>bridzius.lt</h1>
+      <h1>bridzius.lt</h1>
       <div role="navigation">
         <ul>
           <li>
@@ -18,6 +19,7 @@ export function App() {
         </ul>
       </div>
       <Routes>
+        <Route path="/" element={<Articles />} />
       </Routes>
     </StyledApp>
   );
