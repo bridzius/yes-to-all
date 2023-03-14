@@ -1,43 +1,30 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
-
-/* eslint-disable-next-line */
-export interface ArticlesProps {}
+import { useNavigate, useRouteLoaderData } from 'react-router-dom';
 
 const StyledArticles = styled.div``;
 
-function generateHtml(htmlString) {
-  return { __html: htmlString };
+function generateHtml(htmlString: string) {
+    return { __html: htmlString };
 }
 
-export function Articles(props: ArticlesProps) {
-  const [articles, setArticles] = useState([]);
+export function Articles() {
+    const articles = useRouteLoaderData('root') as {
+        [id: string]: string;
+    };
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(
-      'https://raw.githubusercontent.com/bridzius/bridzius.github.io/master/articles.json'
-    )
-      .then((res) => res.json())
-      .then(
-        (articles) => {
-          setArticles(articles);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-  }, []);
-  return (
-    <StyledArticles>
-      {Object.entries(articles).map(([id, text]) => (
-        <article
-          key={id}
-          id={id}
-          dangerouslySetInnerHTML={generateHtml(text)}
-        />
-      ))}
-    </StyledArticles>
-  );
+    return (
+        <StyledArticles>
+            {Object.entries(articles || {}).map(([id, text]) => (
+                <article
+                    key={id}
+                    id={id}
+                    dangerouslySetInnerHTML={generateHtml(text)}
+                    onClick={() => navigate(`/${id}`)}
+                />
+            ))}
+        </StyledArticles>
+    );
 }
 
 export default Articles;
